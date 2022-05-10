@@ -1,8 +1,17 @@
+import random
+
 from django.shortcuts import render
+
+from mainpgsapp.models import Product, ProductCategory
 
 
 def index(request):
-    return render(request, 'mainpgsapp/index.html')
+    products = Product.objects.all()[:4]
+    context = {
+        'title': 'Стульгазин',
+        'products': products
+    }
+    return render(request, 'mainpgsapp/index.html', context=context)
 
 
 def contacts(request):
@@ -10,4 +19,16 @@ def contacts(request):
 
 
 def products(request):
-    return render(request, 'mainpgsapp/products.html')
+    products = Product.objects.all()
+    categories = ProductCategory.objects.all()
+    context = {
+        'title': 'Стульгазин',
+        'products': products[:3],
+        'hot': random.choice(products),
+        'categories': categories
+    }
+    return render(request, 'mainpgsapp/products.html', context=context)
+
+
+def product(request, id):
+    print(id)

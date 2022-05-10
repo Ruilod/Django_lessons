@@ -1070,3 +1070,8 @@ td:first-child {
 .related-products a:hover .text{
 	display: block;
 }
+
+.in_img {
+	height: 100%;
+	width: 100%;
+}

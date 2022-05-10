@@ -13,7 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path
 from mainpgsapp.views import *
 
@@ -22,6 +24,9 @@ urlpatterns = [
 
     path('', index, name='index'),
     path('contacts/', contacts, name='contacts'),
-    path('products/', products, name='products')
+    path('products/', products, name='products'),
+    path('products/<int:id>', product, name='product')
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
